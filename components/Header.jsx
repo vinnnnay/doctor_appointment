@@ -4,12 +4,9 @@ import Image from "next/image";
 import { SignedIn, SignedOut, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { checkUser } from "@/lib/checkUser";
 import { User } from "lucide-react";
-
-
-
+import { Button } from "./ui/button";
 const Header = async() => {
  const user =  await checkUser();
-
 
   return (
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-10 supports-[backdrop-filter]:bg-background/60">

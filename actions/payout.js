@@ -193,3 +193,4 @@ export async function getDoctorEarnings() {
     throw new Error("Failed to fetch doctor earnings: " + error.message);
   }
 }
+

@@ -92,7 +92,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                 </p>
               </div>
               <div className="bg-emerald-900/20 p-3 rounded-full">
-                <Coins className="h-6 w-6 text-emerald-400" />
+                <Coins className="h-6 w-6 text-sky-400" />
               </div>
             </div>
           </CardContent>
@@ -108,7 +108,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                 </p>
               </div>
               <div className="bg-emerald-900/20 p-3 rounded-full">
-                <TrendingUp className="h-6 w-6 text-emerald-400" />
+                <TrendingUp className="h-6 w-6 text-sky-400" />
               </div>
             </div>
           </CardContent>
@@ -127,7 +127,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                 <p className="text-xs text-muted-foreground">completed</p>
               </div>
               <div className="bg-emerald-900/20 p-3 rounded-full">
-                <Calendar className="h-6 w-6 text-emerald-400" />
+                <Calendar className="h-6 w-6 text-sky-400" />
               </div>
             </div>
           </CardContent>
@@ -143,7 +143,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                 </p>
               </div>
               <div className="bg-emerald-900/20 p-3 rounded-full">
-                <BarChart3 className="h-6 w-6 text-emerald-400" />
+                <BarChart3 className="h-6 w-6 text-sky-400" />
               </div>
             </div>
           </CardContent>
@@ -154,7 +154,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
       <Card className="border-emerald-900/20">
         <CardHeader>
           <CardTitle className="text-xl font-bold text-white flex items-center">
-            <CreditCard className="h-5 w-5 mr-2 text-emerald-400" />
+            <CreditCard className="h-5 w-5 mr-2 text-sky-400" />
             Payout Management
           </CardTitle>
         </CardHeader>
@@ -175,8 +175,9 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
               ) : (
                 <Badge
                   variant="outline"
-                  className="bg-emerald-900/20 border-emerald-900/30 text-emerald-400"
+                  className="bg-emerald-900/20 border-emerald-900/30 text-sky-400"
                 >
+
                   Available
                 </Badge>
               )}
@@ -237,7 +238,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
             {!pendingPayout && availableCredits > 0 && (
               <Button
                 onClick={() => setShowPayoutDialog(true)}
-                className="w-full mt-4 bg-emerald-600 hover:bg-emerald-700"
+                className="w-full mt-4 bg-sky-400 hover:bg-sky-800"
               >
                 Request Payout for All Credits
               </Button>
@@ -289,7 +290,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
                       variant="outline"
                       className={
                         payout.status === "PROCESSED"
-                          ? "bg-emerald-900/20 border-emerald-900/30 text-emerald-400"
+                          ? "bg-emerald-900/20 border-emerald-900/30 text-sky-400"
                           : "bg-amber-900/20 border-amber-900/30 text-amber-400"
                       }
                     >
@@ -337,7 +338,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
               </div>
               <div className="border-t border-emerald-900/20 pt-2 flex justify-between font-medium">
                 <span className="text-white">Net payout:</span>
-                <span className="text-emerald-400">
+                <span className="text-sky-400">
                   ${availablePayout.toFixed(2)}
                 </span>
               </div>
@@ -381,7 +382,7 @@ export function DoctorEarnings({ earnings, payouts = [] }) {
               <Button
                 type="submit"
                 disabled={loading}
-                className="bg-emerald-600 hover:bg-emerald-700"
+                className="bg-sky-400 hover:bg-sky-800"
               >
                 {loading ? (
                   <>

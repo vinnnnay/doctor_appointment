@@ -112,74 +112,59 @@ export async function checkAndAllocateCredits(user) {
   }
 }
 
-
 export async function deductCreditsForAppointment(userId, doctorId) {
   try {
-    const user = await db.user.findUnique({
-      where: { id: userId },
-    });
+    // Fetch outside transaction (important)
+    const [user, doctor] = await Promise.all([
+      db.user.findUnique({ where: { id: userId } }),
+      db.user.findUnique({ where: { id: doctorId } }),
+    ]);
 
-    const doctor = await db.user.findUnique({
-      where: { id: doctorId },
-    });
+    if (!user) throw new Error("User not found");
+    if (!doctor) throw new Error("Doctor not found");
 
-    // Ensure user has sufficient credits
     if (user.credits < APPOINTMENT_CREDIT_COST) {
       throw new Error("Insufficient credits to book an appointment");
     }
 
-    if (!doctor) {
-      throw new Error("Doctor not found");
-    }
+    // FAST atomic transaction — only balance mutation
+    const updatedUser = await db.$transaction(
+      async (tx) => {
+        // Update balances FIRST (fastest ops)
+        await tx.user.update({
+          where: { id: user.id },
+          data: { credits: { decrement: APPOINTMENT_CREDIT_COST } },
+        });
 
-    // Deduct credits from patient and add to doctor
-    const result = await db.$transaction(async (tx) => {
-      // Create transaction record for patient (deduction)
-      await tx.creditTransaction.create({
-        data: {
-          userId: user.id,
-          amount: -APPOINTMENT_CREDIT_COST,
-          type: "APPOINTMENT_DEDUCTION",
-        },
-      });
+        await tx.user.update({
+          where: { id: doctor.id },
+          data: { credits: { increment: APPOINTMENT_CREDIT_COST } },
+        });
 
-      // Create transaction record for doctor (addition)
-      await tx.creditTransaction.create({
-        data: {
-          userId: doctor.id,
-          amount: APPOINTMENT_CREDIT_COST,
-          type: "APPOINTMENT_DEDUCTION", // Using same type for consistency
-        },
-      });
+        // Log transactions AFTER balance change
+        await tx.creditTransaction.createMany({
+          data: [
+            {
+              userId: user.id,
+              amount: -APPOINTMENT_CREDIT_COST,
+              type: "APPOINTMENT_DEDUCTION",
+            },
+            {
+              userId: doctor.id,
+              amount: APPOINTMENT_CREDIT_COST,
+              type: "APPOINTMENT_DEDUCTION",
+            },
+          ],
+        });
 
-      // Update patient's credit balance (decrement)
-      const updatedUser = await tx.user.update({
-        where: {
-          id: user.id,
-        },
-        data: {
-          credits: {
-            decrement: APPOINTMENT_CREDIT_COST,
-          },
-        },
-      });
+        return true;
+      },
+      {
+        timeout: 15000, // Increase timeout for Neon
+      }
+    );
 
-      // Update doctor's credit balance (increment)
-      await tx.user.update({
-        where: {
-          id: doctor.id,
-        },
-        data: {
-          credits: {
-            increment: APPOINTMENT_CREDIT_COST,
-          },
-        },
-      });
-
-      return updatedUser;
-    });
-
-    return { success: true, user: result };
+    return { success: true };
   } catch (error) {
     console.error("Failed to deduct credits:", error);
     return { success: false, error: error.message };

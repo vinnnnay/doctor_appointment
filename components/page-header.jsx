@@ -23,7 +23,7 @@ export function PageHeader({
         <Button
           variant="outline"
           size="sm"
-          className="mb-2 border-emerald-900/30"
+          className="mb-2 border-sky-900/30"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
           {backLabel}
@@ -31,7 +31,7 @@ export function PageHeader({
       </Link>
       <div className="flex items-end gap-2">
         {icon && (
-          <div className="text-emerald-400">
+          <div className="text-sky-400">
             {React.cloneElement(icon, {
               className: "h-12 md:h-14 w-12 md:w-14",
             })}

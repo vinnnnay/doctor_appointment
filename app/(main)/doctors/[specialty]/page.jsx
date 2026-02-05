@@ -19,7 +19,7 @@ export default async function DoctorSpecialtyPage({ params }) {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6 pt-7">
       <PageHeader
         title={specialty.split("%20").join(" ")}
         backLink="/doctors"
@@ -33,7 +33,7 @@ export default async function DoctorSpecialtyPage({ params }) {
           ))}
         </div>
       ) : (
-        <div className="text-center py-12">
+        <div className="text-center py-15">
           <h3 className="text-xl font-medium text-white mb-2">
             No doctors available
           </h3>

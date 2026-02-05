@@ -88,13 +88,13 @@ export function DoctorProfile({ doctor, availableDays }) {
 
                 <Badge
                   variant="outline"
-                  className="bg-emerald-900/20 border-emerald-900/30 text-emerald-400 mb-4"
+                  className="bg-emerald-900/20 border-emerald-900/30 text-sky-400 mb-4"
                 >
                   {doctor.specialty}
                 </Badge>
 
                 <div className="flex items-center justify-center mb-2">
-                  <Medal className="h-4 w-4 text-emerald-400 mr-2" />
+                  <Medal className="h-4 w-4 text-sky-400 mr-2" />
                   <span className="text-muted-foreground">
                     {doctor.experience} years experience
                   </span>
@@ -102,7 +102,7 @@ export function DoctorProfile({ doctor, availableDays }) {
 
                 <Button
                   onClick={toggleBooking}
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 mt-4"
+                  className="w-full bg-sky-400 hover:bg-sky-800 mt-4"
                 >
                   {showBooking ? (
                     <>
@@ -136,7 +136,7 @@ export function DoctorProfile({ doctor, availableDays }) {
           <CardContent className="space-y-6">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <FileText className="h-5 w-5 text-emerald-400" />
+                <FileText className="h-5 w-5 text-sky-400" />
                 <h3 className="text-white font-medium">Description</h3>
               </div>
               <p className="text-muted-foreground whitespace-pre-line">
@@ -148,12 +148,12 @@ export function DoctorProfile({ doctor, availableDays }) {
 
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-emerald-400" />
+                <Clock className="h-5 w-5 text-sky-400" />
                 <h3 className="text-white font-medium">Availability</h3>
               </div>
               {totalSlots > 0 ? (
                 <div className="flex items-center">
-                  <Calendar className="h-5 w-5 text-emerald-400 mr-2" />
+                  <Calendar className="h-5 w-5 text-sky-400 mr-2" />
                   <p className="text-muted-foreground">
                     {totalSlots} time slots available for booking over the next
                     4 days

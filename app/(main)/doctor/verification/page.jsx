@@ -100,7 +100,7 @@ export default async function VerificationPage() {
                   </Button>
                   <Button
                     asChild
-                    className="bg-emerald-600 hover:bg-emerald-700"
+                    className="bg-sky-400 hover:bg-sky-800"
                   >
                     <Link href="/doctor/update-profile">Update Profile</Link>
                   </Button>
@@ -116,7 +116,7 @@ export default async function VerificationPage() {
                   </Button>
                   <Button
                     asChild
-                    className="bg-emerald-600 hover:bg-emerald-700"
+                    className="bg-sky-400 hover:bg-sky-800"
                   >
                     <Link href="/contact-support">Contact Support</Link>
                   </Button>

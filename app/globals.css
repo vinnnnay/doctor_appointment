@@ -122,7 +122,7 @@
 }
 
 @utility gradient {
-  @apply bg-gradient-to-b from-emerald-500 to-teal-400;
+  @apply bg-gradient-to-b from-sky-400 to-sky-500;
 }
 
 @utility gradient-title {

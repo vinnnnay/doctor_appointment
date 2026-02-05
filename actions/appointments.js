@@ -205,15 +205,24 @@ export async function generateVideoToken(formData) {
     }
 
     // Verify the appointment is within a valid time range (e.g., starting 5 minutes before scheduled time)
-    const now = new Date();
-    const appointmentTime = new Date(appointment.startTime);
-    const timeDifference = (appointmentTime - now) / (1000 * 60); // difference in minutes
+    // const now = new Date();
+    // const appointmentTime = new Date(appointment.startTime);
+    // const timeDifference = (appointmentTime - now) / (1000 * 60); // difference in minutes
 
-    if (timeDifference > 30) {
-      throw new Error(
-        "The call will be available 30 minutes before the scheduled time"
-      );
-    }
+    // if (timeDifference > 30) {
+    //   throw new Error(
+    //     "The call will be available 30 minutes before the scheduled time"
+    //   );
+    // }
+
+
+    const now = new Date();
+const endTime = new Date(appointment.endTime);
+
+if (now > endTime) {
+  throw new Error("This appointment has already ended");
+}
+
 
     // Generate a token for the video session
     // Token expires 2 hours after the appointment start time

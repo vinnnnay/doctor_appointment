@@ -206,18 +206,16 @@ export function AppointmentCard({
   }, [tokenData, appointment.id, router]);
 
   // Determine if appointment is active (within 30 minutes of start time)
-  const isAppointmentActive = () => {
-    const now = new Date();
-    const appointmentTime = new Date(appointment.startTime);
-    const appointmentEndTime = new Date(appointment.endTime);
 
-    // Can join 30 minutes before start until end time
-    return (
-      (appointmentTime.getTime() - now.getTime() <= 30 * 60 * 1000 &&
-        now < appointmentTime) ||
-      (now >= appointmentTime && now <= appointmentEndTime)
-    );
-  };
+  
+  const isAppointmentActive = () => {
+  const now = new Date();
+  const appointmentEndTime = new Date(appointment.endTime);
+
+  // Allow joining anytime until appointment ends
+  return now <= appointmentEndTime;
+};
+
 
   // Determine other party information based on user role
   const otherParty =
